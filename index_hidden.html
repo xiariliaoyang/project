@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <title>iScroll demo: simple</title>
+        <link media="screen" rel="stylesheet" type="text/css" href="common.css"/>
+        <link media="screen" rel="stylesheet" type="text/css" href="site.css"/>
+        <script src="jquery.min.js"></script>
+        <script type="text/javascript" src="iscroll.js"></script>
+        <script src="edoc.js" type="text/javascript"></script>
+        <script src="site.js" type="text/javascript"></script>
+        <script type="text/javascript">
+
+ var meta_info_list = [{"title":"首页","comment":"","reference":null}];
+
+ </script>
+  <script type="text/javascript">
+            var myscroll;
+            function loaded(){
+                myscroll=new iScroll("wrapper",{
+                    hScroll:true,
+                    vScroll:false,
+                    vScrollbar:false,
+                    hScrollbar:false,
+                    bounce:false,
+                    momentum:false,
+                    snap:"li",
+                    lockDirection:true,
+                    checkDOMChanges: true,
+                    onScrollMove:false,
+                    onBeforeScrollStart: function (e) {
+                        var target = e.target;
+                        while (target.nodeType != 1) target = target.parentNode;
+                        if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
+                            e.preventDefault();
+                        }
+                });
+
+//
+//            $(".add").click(function(){
+//                $(this).parent("li").after("<li>患者信息2</li>");
+//                var li_width = $("#scroller ul li").first().width();
+//                var li_num = $("#scroller ul li").length;
+//                var s_width = li_width*1*li_num;
+//                $("#scroller").css("width",s_width);
+//            });
+
+    }
+
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+window.addEventListener("DOMContentLoaded",loaded,false);
+
+        $(document).ready(function(){
+            //style
+            $(".keynote_li div").each(function(){
+                $(this).children("p:first").addClass("question_title");
+            });
+            //add new page
+            $(".add_bms").click(function(){
+                $(this).parent("form").parent("li").next("li").show();
+                next();
+            });
+            //跳到合并药信息
+            $(".next_step").click(function(){
+                $("#hebing").show();
+                next();
+            });
+            //跳到不良事件过程
+            $(".next_step_2").click(function(){
+                $("#buliang").show();
+                next();
+            });
+            //跳到不良事件过程描述
+            $(".next_step_3").click(function(){
+                $("#miaoshu").show();
+                next();
+            });
+            //ore-next page
+            function pre (){
+              myscroll.scrollTo(-1024,0,200,true);
+            };
+            function next (){
+            myscroll.scrollTo(1024,0,200,true);
+            };
+
+            //第一页验证
+            $("#box1").submit(function(e){
+                e.preventDefault();
+                var is_form_ok = true;
+                $("#box1 input.i-text").each(function(){
+                    if(!$(this).val()){
+                    is_form_ok = false;
+                    $(this).css("border","1px solid red");
+                    $(this).siblings(".question_title").css("color","#3366cc");
+                    }
+                    });
+
+                if(is_form_ok) {
+                    $(this).parent("li").next("li").show();
+                    next();
+                }
+
+            });
+            //第二页 患者信息
+            $("#box2").submit(function(e){
+                e.preventDefault();
+                var is_form_ok = true;
+                $("#box2 input.i-text").each(function(){
+                    if(!$(this).val()){
+                    is_form_ok = false;
+                    $(this).css("border","1px solid red");
+                    $(this).siblings(".question_title").css("color","#3366cc");
+                    }
+                    });
+
+                if(is_form_ok) {
+                    $(this).parent("li").next("li").show();
+                    next();
+                }
+
+            });
+            //第三页 bms产品信息
+            //bms产品信息1
+            $("#box3").submit(function(e){
+                e.preventDefault();
+                var is_form_ok = true;
+                $("#box3 input.i-text").each(function(){
+                    if(!$(this).val()){
+                        is_form_ok = false;
+                        $(this).css("border","1px solid red");
+                        $(this).siblings(".question_title").css("color","#3366cc");
+                    }
+                    });
+                if(is_form_ok) {
+                    $("#box3").find(".btn").hide();
+                    $("#box3").find(".add_bms").show();
+                    $("#box3").find(".next_step").show();
+                }
+            });
+
+            //bms产品信息2
+            $("#box4").submit(function(e){
+                e.preventDefault();
+                var is_form_ok = true;
+                $("#box4 input.i-text").each(function(){
+                    if(!$(this).val()){
+                        is_form_ok = false;
+                        $(this).css("border","1px solid red");
+                        $(this).siblings(".question_title").css("color","#3366cc");
+                    }
+                    });
+                if(is_form_ok) {
+                    $("#box4").find(".btn").hide();
+                    $("#box4").find(".add_bms").show();
+                    $("#box4").find(".next_step").show();
+                }
+            });
+
+            //bms产品信息3
+            $("#box5").submit(function(e){
+                e.preventDefault();
+                var is_form_ok = true;
+                $("#box5 input.i-text").each(function(){
+                    if(!$(this).val()){
+                        is_form_ok = false;
+                        $(this).css("border","1px solid red");
+                        $(this).siblings(".question_title").css("color","#3366cc");
+                    }
+                    });
+                if(is_form_ok) {
+                    $("#box5").find(".btn").hide();
+                    $("#box5").find(".add_bms").show();
+                    $("#box5").find(".next_step").show();
+                }
+            });
+
+            //bms产品信息4
+            $("#box6").submit(function(e){
+                e.preventDefault();
+                var is_form_ok = true;
+                $("#box6 input.i-text").each(function(){
+                    if(!$(this).val()){
+                        is_form_ok = false;
+                        $(this).css("border","1px solid red");
+                        $(this).siblings(".question_title").css("color","#3366cc");
+                    }
+                    });
+                if(is_form_ok) {
+                    $("#box6").find(".btn").hide();
+                    $("#box6").find(".add_bms").show();
+                    $("#box6").find(".next_step").show();
+                }
+            });
+
+            //bms产品信息5
+            $("#box7").submit(function(e){
+                e.preventDefault();
+                var is_form_ok = true;
+                $("#box7 input.i-text").each(function(){
+                    if(!$(this).val()){
+                        is_form_ok = false;
+                        $(this).css("border","1px solid red");
+                        $(this).siblings(".question_title").css("color","#3366cc");
+                    }
+                    });
+                if(is_form_ok) {
+                    $(this).parent("li").next("li").show();
+                    next();
+                }
+            });
+            //合并信息验证
+            //合并信息验证1
+            $("#box8").submit(function(e){
+                e.preventDefault();
+                var is_form_ok = true;
+                $("#box8 input.i-text").each(function(){
+                    if(!$(this).val()){
+                        is_form_ok = false;
+                        $(this).css("border","1px solid red");
+                        $(this).siblings(".question_title").css("color","#3366cc");
+                    }
+                    });
+                if(is_form_ok) {
+                    $("#box8").find(".btn").hide();
+                    $("#box8").find(".add_bms").show();
+                    $("#box8").find(".next_step_2").show();
+                }
+            });
+            //合并信息验证2
+            $("#box9").submit(function(e){
+                e.preventDefault();
+                var is_form_ok = true;
+                $("#box9 input.i-text").each(function(){
+                    if(!$(this).val()){
+                        is_form_ok = false;
+                        $(this).css("border","1px solid red");
+                        $(this).siblings(".question_title").css("color","#3366cc");
+                    }
+                    });
+                if(is_form_ok) {
+                    $("#box9").find(".btn").hide();
+                    $("#box9").find(".add_bms").show();
+                    $("#box9").find(".next_step_2").show();
+                }
+            });
+            //合并信息验证3
+            $("#box10").submit(function(e){
+                e.preventDefault();
+                var is_form_ok = true;
+                $("#box10 input.i-text").each(function(){
+                    if(!$(this).val()){
+                        is_form_ok = false;
+                        $(this).css("border","1px solid red");
+                        $(this).siblings(".question_title").css("color","#3366cc");
+                    }
+                    });
+                if(is_form_ok) {
+                    $("#box10").find(".btn").hide();
+                    $("#box10").find(".add_bms").show();
+                    $("#box10").find(".next_step_2").show();
+                }
+            });
+            //合并信息验证4
+            $("#box11").submit(function(e){
+                e.preventDefault();
+                var is_form_ok = true;
+                $("#box11 input.i-text").each(function(){
+                    if(!$(this).val()){
+                        is_form_ok = false;
+                        $(this).css("border","1px solid red");
+                        $(this).siblings(".question_title").css("color","#3366cc");
+                    }
+                    });
+                if(is_form_ok) {
+                    $("#box11").find(".btn").hide();
+                    $("#box11").find(".add_bms").show();
+                    $("#box11").find(".next_step_2").show();
+                }
+            });
+
+            //合并信息验证5
+            $("#box12").submit(function(e){
+                e.preventDefault();
+                var is_form_ok = true;
+                $("#box12 input.i-text").each(function(){
+                    if(!$(this).val()){
+                        is_form_ok = false;
+                        $(this).css("border","1px solid red");
+                        $(this).siblings(".question_title").css("color","#3366cc");
+                    }
+                    });
+                if(is_form_ok) {
+                    $(this).parent("li").next("li").show();
+                    next();
+                }
+            });
+            //不良反应
+            //不良1
+            $("#box13").submit(function(e){
+                e.preventDefault();
+                var is_form_ok = true;
+                $("#box13 input.i-text").each(function(){
+                    if(!$(this).val()){
+                        is_form_ok = false;
+                        $(this).css("border","1px solid red");
+                        $(this).siblings(".question_title").css("color","#3366cc");
+                    }
+                    });
+                if(is_form_ok) {
+                    $("#box13").find(".btn").hide();
+                    $("#box13").find(".add_bms").show();
+                    $("#box13").find(".next_step_3").show();
+                }
+            });
+            //不良2
+            $("#box14").submit(function(e){
+                e.preventDefault();
+                var is_form_ok = true;
+                $("#box14 input.i-text").each(function(){
+                    if(!$(this).val()){
+                        is_form_ok = false;
+                        $(this).css("border","1px solid red");
+                        $(this).siblings(".question_title").css("color","#3366cc");
+                    }
+                    });
+                if(is_form_ok) {
+                    $("#box14").find(".btn").hide();
+                    $("#box14").find(".add_bms").show();
+                    $("#box14").find(".next_step_3").show();
+                }
+            });
+            //不良3
+            $("#box15").submit(function(e){
+                e.preventDefault();
+                var is_form_ok = true;
+                $("#box15 input.i-text").each(function(){
+                    if(!$(this).val()){
+                        is_form_ok = false;
+                        $(this).css("border","1px solid red");
+                        $(this).siblings(".question_title").css("color","#3366cc");
+                    }
+                    });
+                if(is_form_ok) {
+                    $("#box15").find(".btn").hide();
+                    $("#box15").find(".add_bms").show();
+                    $("#box15").find(".next_step_3").show();
+                }
+            });
+            //不良4
+            $("#box16").submit(function(e){
+                e.preventDefault();
+                var is_form_ok = true;
+                $("#box16 input.i-text").each(function(){
+                    if(!$(this).val()){
+                        is_form_ok = false;
+                        $(this).css("border","1px solid red");
+                        $(this).siblings(".question_title").css("color","#3366cc");
+                    }
+                    });
+                if(is_form_ok) {
+                    $("#box16").find(".btn").hide();
+                    $("#box16").find(".add_bms").show();
+                    $("#box16").find(".next_step_3").show();
+                }
+            });
+            //不良5
+            $("#box17").submit(function(e){
+                e.preventDefault();
+                var is_form_ok = true;
+                $("#box17 input.i-text").each(function(){
+                    if(!$(this).val()){
+                        is_form_ok = false;
+                        $(this).css("border","1px solid red");
+                        $(this).siblings(".question_title").css("color","#3366cc");
+                    }
+                    });
+                if(is_form_ok) {
+                    $(this).parent("li").next("li").show();
+                    next();
+                }
+            });
+
+        });
+</script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="scroller" style="width:18432px;">
+            <ul>
+                <li>
+                <p class="new_page_title">报告类型</p>
+                <!-- <div class="step_to_step">
+
+                    <div class="step_div step_active">
+                        <span>报告人信息</sapn>
+                    </div>
+                    <div class="step_div">
+                        <span>患者信息</span>
+                    </div>
+                    <div class="step_div">
+                        BMS产品信息
+                    </div>
+                    <div class="step_div">
+                        合并用药信息
+                    </div>
+                    <div class="step_div">
+                        不良事件信息
+                    </div>
+                </div> -->
+                <form id="box1" class="box">
+                    <div class="keynote_li">
+                        <div>
+                            <p>报告类型</p>
+                            <p class="P-A">A:首次报告</p>
+                            <p class="P-B">B:随访报告</p>
+                            <input type="text" name="50a0c91894ddde047a000518" class="i-text">
+                        </div>
+                    </div>
+                    <div class="keynote_li">
+                        <div>
+                            <p>BMS员工获知时间</p>
+                            <input type="date" name="50a0c91894ddde047a00051b" class="i-text long-text">
+                        </div>
+                    </div>
+                    <div class="keynote_li">
+                        <div>
+                            <p>报告人类型</p>
+                            <p class="P-A">A:处方医师</p>
+                            <p class="P-B">B:患者</p>
+                            <p class="P-C">C:其他</p>
+                            <input type="text" name="50a0c91894ddde047a00051c" class="i-text">
+                        </div>
+                    </div>
+                    <div class="keynote_li"><div><p>报告人类型-其他</p>
+                        <input type="text" name="50a0c91894ddde047a000520" class="i-text long-text">
+                    </div>
+                </div><div class="keynote_li"><div><p>报告人姓名</p><input type="text" name="50a0c91894ddde047a000521" class="i-text long-text"></div></div><div class="keynote_li"><div><p>专科/专业</p><input type="text" name="50a0c91894ddde047a000522" class="i-text long-text"></div></div><div class="keynote_li"><div><p>是否愿意接受随访</p>
+                <p class="P-A">A:是</p>
+                <p class="P-B">B:否</p><input type="text" name="50a0c91894ddde047a000523" class="i-text"></div></div><div class="keynote_li"><div><p>报告途径</p>
+                <p class="P-A">A:电话</p>
+                <p class="P-B">B:传真</p>
+                <p class="P-C">C:当面报告</p>
+                <p class="P-D">D:其他</p>
+                <input type="text" name="50a0c91894ddde047a000526" class="i-text"></div></div><div class="keynote_li"><div><p>其他</p><input type="text" name="50a0c91894ddde047a00052b" class="i-text long-text"></div></div><div class="keynote_li"><div><p>联系电话</p><input type="text" name="50a0c91894ddde047a00052c" class="i-text long-text"></div></div><div class="keynote_li"><div><p>工作单位</p><input type="text" name="50a0c91894ddde047a00052d" class="i-text long-text"></div></div>
+
+<a class="add_bms" href="#">再添加一条</a>
+                        <a class="next_step_3" href="#">下一步</a>
+                    <input type="submit" class="btn" value="提交"/>
+                </form>
+                </li>
+                <!--患者信息-->
+                <li style="display:none;">
+                    <p class="new_page_title">患者信息</p>
+                <form id="box2" class="box">
+                    <div class="keynote_li"><div><p>姓名</p><input type="text" name="50a0c91894ddde047a00052e" class="i-text long-text"></div></div><div class="keynote_li"><div><p>性别</p>
+                    <p class="P-A">A:男</p>
+                    <p class="P-B">B:女</p><input type="text" name="50a0c91894ddde047a00052f" class="i-text"></div></div><div class="keynote_li"><div><p>出生日期</p><input type="date" name="50a0c91894ddde047a000532" class="i-text long-text"></div></div><div class="keynote_li"><div><p>年龄</p><input type="text" name="50a0c91894ddde047a000533" class="i-text long-text"></div></div><div class="keynote_li"><div><p>身高</p><input type="text" name="50a0c91894ddde047a000534" class="i-text long-text"></div></div><div class="keynote_li"><div><p>体重</p><input type="text" name="50a0c91894ddde047a000535" class="i-text long-text"></div></div><div class="keynote_li"><div><p>民族</p><input type="text" name="50a0c91894ddde047a000536" class="i-text long-text"></div></div><div class="keynote_li"><div><p>联系电话</p><input type="text" name="50a0c91894ddde047a000537" class="i-text long-text"></div></div>
+                    <div class="keynote_li">
+                        <div><p>相关重要信息</p>
+                            <p class="mul-A" class="check">A:吸烟史</p>
+                            <p class="mul-B" class="check">B:饮酒史</p>
+                            <p class="mul-C" class="check">C:妊娠期</p>
+                            <p class="mul-D" class="check">D:肝病史</p>
+                            <p class="mul-E" class="check">E:肾病史</p>
+                            <p class="mul-F" class="check">F:过敏史</p>
+                            <p class="mul-G" class="check">G:无</p>
+                            <input type="text" name="50a0c91894ddde047a000538"  class="i-text distinct"></div></div><div class="keynote_li"><div><p>妊娠期</p><input type="text" name="50a0c91894ddde047a000540" class="i-text long-text"></div></div><div class="keynote_li"><div><p>过敏史</p><input type="text" name="50a0c91894ddde047a000541" class="i-text long-text"></div></div><div class="keynote_li"><div><p>其它病史信息和实验室检查信息</p><input type="text" name="50a0c91894ddde047a000542" class="i-text long-text"></div></div><div class="keynote_li"><div><p>就诊医生信息</p>
+                            <p class="P-A">A:有</p>
+                            <p class="P-B">B:无</p><input type="text" name="50a0c91894ddde047a000543" class="i-text"></div></div><div class="keynote_li"><div><p>联系电话</p><input type="text" name="50a0c91894ddde047a000546" class="i-text long-text"></div></div><div class="keynote_li"><div><p>单位信息</p><input type="text" name="50a0c91894ddde047a000547" class="i-text long-text"></div></div>
+
+                    <input type="submit" class="btn" value="提交"/>
+                </form>
+                </li>
+                <!--bms产品信息-->
+                <!--bms产品信息1-->
+                <li style="display:none;">
+                    <p class="new_page_title">BMS产品信息</p>
+                <form id="box3" class="box">
+                    <div class="keynote_li"><div><p>药品名称</p><input type="text" name="50a0c91894ddde047a000548" class="i-text long-text"></div></div><div class="keynote_li"><div><p>用药原因</p><input type="text" name="50a0c91894ddde047a000549" class="i-text long-text"></div></div><div class="keynote_li"><div><p>产品批号</p><input type="text" name="50a0c91894ddde047a00054a" class="i-text long-text"></div></div><div class="keynote_li"><div><p>给药剂量、频率</p><input type="text" name="50a0c91894ddde047a00054b" class="i-text long-text"></div></div><div class="keynote_li"><div><p>给药途径</p><input type="text" name="50a0c91894ddde047a00054c" class="i-text long-text"></div></div><div class="keynote_li"><div><p>开始用药时间</p><input type="date" name="50a0c91894ddde047a00054d" class="i-text long-text"></div></div><div class="keynote_li"><div><p>停药时间</p><input type="date" name="50a0c91894ddde047a00054e" class="i-text long-text"></div></div>
+                    <div class="keynote_li"><div>
+                        <p>措施</p>
+                        <p class="P-A">A:继续用药</p>
+                        <p class="P-B">B:改变剂量</p>
+                        <p class="P-C">C:停止用药</p>
+                        <p class="P-D">D:未知</p>
+                        <input type="text" name="50a0c91894ddde047a00054f" class="i-text"></div></div><div class="keynote_li"><div><p>停药后，不良事件是否消失?</p>
+                        <p class="P-A">A:是</p>
+                        <p class="P-B">B:否</p>
+                        <p class="P-C">C:未知</p>
+                        <p class="P-D">D:不适用</p><input type="text" name="50a0c91894ddde047a000554" class="i-text"></div></div><div class="keynote_li"><div><p>再次服药后，不良事件是否再次出现?</p><p class="P-A">A:是</p>
+                        <p class="P-B">B:否</p>
+                        <p class="P-C">C:未知</p>
+                        <p class="P-D">D:不适用</p><input type="text" name="50a0c91894ddde047a000559" class="i-text"></div></div>
+
+                    <a class="add_bms" href="#">再添加一条</a>
+                    <a class="next_step button_style" href="#">下一步</a>
+                    <input type="submit" class="btn" value="提交"/>
+                </form>
+                </li>
+                <!--bms产品信息2-->
+                <li style="display:none;">
+                <p class="new_page_title">新增bms产品信息1</p>
+                <form id="box4" class="box">
+                    <div class="keynote_li"><div><p>药品名称</p><input type="text" name="50a0c91894ddde047a000548" class="i-text long-text"></div></div><div class="keynote_li"><div><p>用药原因</p><input type="text" name="50a0c91894ddde047a000549" class="i-text long-text"></div></div><div class="keynote_li"><div><p>产品批号</p><input type="text" name="50a0c91894ddde047a00054a" class="i-text long-text"></div></div><div class="keynote_li"><div><p>给药剂量、频率</p><input type="text" name="50a0c91894ddde047a00054b" class="i-text long-text"></div></div><div class="keynote_li"><div><p>给药途径</p><input type="text" name="50a0c91894ddde047a00054c" class="i-text long-text"></div></div><div class="keynote_li"><div><p>开始用药时间</p><input type="date" name="50a0c91894ddde047a00054d" class="i-text long-text"></div></div><div class="keynote_li"><div><p>停药时间</p><input type="date" name="50a0c91894ddde047a00054e" class="i-text long-text"></div></div><div class="keynote_li"><div><p>措施</p>   <p class="P-A">A:继续用药</p>
+                        <p class="P-B">B:改变剂量</p>
+                        <p class="P-C">C:停止用药</p>
+                        <p class="P-D">D:未知</p><input type="text" name="50a0c91894ddde047a00054f" class="i-text"></div></div><div class="keynote_li"><div><p>停药后，不良事件是否消失?</p><p class="P-A">A:是</p>
+                        <p class="P-B">B:否</p>
+                        <p class="P-C">C:未知</p>
+                        <p class="P-D">D:不适用</p><input type="text" name="50a0c91894ddde047a000554" class="i-text"></div></div><div class="keynote_li"><div><p>再次服药后，不良事件是否再次出现?</p>
+                        <p class="P-A">A:是</p>
+                        <p class="P-B">B:否</p>
+                        <p class="P-C">C:未知</p>
+                        <p class="P-D">D:不适用</p><input type="text" name="50a0c91894ddde047a000559" class="i-text"></div></div>
+
+                    <a class="add_bms" href="#">再添加一条</a>
+                    <a class="next_step button_style" href="#">下一步</a>
+                    <input type="submit" class="btn" value="提交"/>
+                </form>
+                </li>
+                <!--bms产品信息3-->
+                <li style="display:none;">
+                <p class="new_page_title">新增bms产品信息2</p>
+                <form id="box5" class="box">
+                    <div class="keynote_li"><div><p>药品名称</p><input type="text" name="50a0c91894ddde047a000548" class="i-text long-text"></div></div><div class="keynote_li"><div><p>用药原因</p><input type="text" name="50a0c91894ddde047a000549" class="i-text long-text"></div></div><div class="keynote_li"><div><p>产品批号</p><input type="text" name="50a0c91894ddde047a00054a" class="i-text long-text"></div></div><div class="keynote_li"><div><p>给药剂量、频率</p><input type="text" name="50a0c91894ddde047a00054b" class="i-text long-text"></div></div><div class="keynote_li"><div><p>给药途径</p><input type="text" name="50a0c91894ddde047a00054c" class="i-text long-text"></div></div><div class="keynote_li"><div><p>开始用药时间</p><input type="date" name="50a0c91894ddde047a00054d" class="i-text long-text"></div></div><div class="keynote_li"><div><p>停药时间</p><input type="date" name="50a0c91894ddde047a00054e" class="i-text long-text"></div></div><div class="keynote_li"><div><p>措施</p>   <p class="P-A">A:继续用药</p>
+                        <p class="P-B">B:改变剂量</p>
+                        <p class="P-C">C:停止用药</p>
+                        <p class="P-D">D:未知</p><input type="text" name="50a0c91894ddde047a00054f" class="i-text"></div></div><div class="keynote_li"><div><p>停药后，不良事件是否消失?</p><p class="P-A">A:是</p>
+                        <p class="P-B">B:否</p>
+                        <p class="P-C">C:未知</p>
+                        <p class="P-D">D:不适用</p><input type="text" name="50a0c91894ddde047a000554" class="i-text"></div></div><div class="keynote_li"><div><p>再次服药后，不良事件是否再次出现?</p><p class="P-A">A:是</p>
+                        <p class="P-B">B:否</p>
+                        <p class="P-C">C:未知</p>
+                        <p class="P-D">D:不适用</p><input type="text" name="50a0c91894ddde047a000559" class="i-text"></div></div>
+
+                    <a class="add_bms" href="#">再添加一条</a>
+                    <a class="next_step button_style" href="#">下一步</a>
+                    <input type="submit" class="btn" value="提交"/>
+                </form>
+                </li>
+                <!--bms产品信息4-->
+                <li style="display:none;">
+                <p class="new_page_title">新增bms产品信息3</p>
+                <form id="box6" class="box">
+                    <div class="keynote_li"><div><p>药品名称</p><input type="text" name="50a0c91894ddde047a000548" class="i-text long-text"></div></div><div class="keynote_li"><div><p>用药原因</p><input type="text" name="50a0c91894ddde047a000549" class="i-text long-text"></div></div><div class="keynote_li"><div><p>产品批号</p><input type="text" name="50a0c91894ddde047a00054a" class="i-text long-text"></div></div><div class="keynote_li"><div><p>给药剂量、频率</p><input type="text" name="50a0c91894ddde047a00054b" class="i-text long-text"></div></div><div class="keynote_li"><div><p>给药途径</p><input type="text" name="50a0c91894ddde047a00054c" class="i-text long-text"></div></div><div class="keynote_li"><div><p>开始用药时间</p><input type="date" name="50a0c91894ddde047a00054d" class="i-text long-text"></div></div><div class="keynote_li"><div><p>停药时间</p><input type="date" name="50a0c91894ddde047a00054e" class="i-text long-text"></div></div><div class="keynote_li"><div><p>措施</p>   <p class="P-A">A:继续用药</p>
+                        <p class="P-B">B:改变剂量</p>
+                        <p class="P-C">C:停止用药</p>
+                        <p class="P-D">D:未知</p><input type="text" name="50a0c91894ddde047a00054f" class="i-text"></div></div><div class="keynote_li"><div><p>停药后，不良事件是否消失?</p><p class="P-A">A:是</p>
+                        <p class="P-B">B:否</p>
+                        <p class="P-C">C:未知</p>
+                        <p class="P-D">D:不适用</p><input type="text" name="50a0c91894ddde047a000554" class="i-text"></div></div><div class="keynote_li"><div><p>再次服药后，不良事件是否再次出现?</p><p class="P-A">A:是</p>
+                        <p class="P-B">B:否</p>
+                        <p class="P-C">C:未知</p>
+                        <p class="P-D">D:不适用</p><input type="text" name="50a0c91894ddde047a000559" class="i-text"></div></div>
+
+                    <a class="add_bms" href="#">再添加一条</a>
+                    <a class="next_step button_style" href="#">下一步</a>
+                    <input type="submit" class="btn" value="提交"/>
+                </form>
+                </li>
+                <!--bms产品信息5-->
+                <li style="display:none;">
+                <p class="new_page_title">新增bms产品信息4</p>
+                <form id="box7" class="box">
+                    <div class="keynote_li"><div><p>药品名称</p><input type="text" name="50a0c91894ddde047a000548" class="i-text long-text"></div></div><div class="keynote_li"><div><p>用药原因</p><input type="text" name="50a0c91894ddde047a000549" class="i-text long-text"></div></div><div class="keynote_li"><div><p>产品批号</p><input type="text" name="50a0c91894ddde047a00054a" class="i-text long-text"></div></div><div class="keynote_li"><div><p>给药剂量、频率</p><input type="text" name="50a0c91894ddde047a00054b" class="i-text long-text"></div></div><div class="keynote_li"><div><p>给药途径</p><input type="text" name="50a0c91894ddde047a00054c" class="i-text long-text"></div></div><div class="keynote_li"><div><p>开始用药时间</p><input type="date" name="50a0c91894ddde047a00054d" class="i-text long-text"></div></div><div class="keynote_li"><div><p>停药时间</p><input type="date" name="50a0c91894ddde047a00054e" class="i-text long-text"></div></div><div class="keynote_li"><div><p>措施</p>   <p class="P-A">A:继续用药</p>
+                        <p class="P-B">B:改变剂量</p>
+                        <p class="P-C">C:停止用药</p>
+                        <p class="P-D">D:未知</p><input type="text" name="50a0c91894ddde047a00054f" class="i-text"></div></div><div class="keynote_li"><div><p>停药后，不良事件是否消失?</p><p class="P-A">A:是</p>
+                        <p class="P-B">B:否</p>
+                        <p class="P-C">C:未知</p>
+                        <p class="P-D">D:不适用</p><input type="text" name="50a0c91894ddde047a000554" class="i-text"></div></div><div class="keynote_li"><div><p>再次服药后，不良事件是否再次出现?</p><p class="P-A">A:是</p>
+                        <p class="P-B">B:否</p>
+                        <p class="P-C">C:未知</p>
+                        <p class="P-D">D:不适用</p><input type="text" name="50a0c91894ddde047a000559" class="i-text"></div></div>
+
+                    <a class="add_bms" href="#">再添加一条</a>
+                    <a class="next_step button_style" href="#">下一步</a>
+                    <input type="submit" class="btn" value="提交"/>
+                </form>
+                </li>
+                <!--合并用药信息-->
+                <li id="hebing" style="display:none;">
+                    <p class="new_page_title">合并用药信息</p>
+                <form id="box8" class="box">
+                                        <div class="keynote_li"><div><p>药品名称</p><input type="text" name="50a0c91894ddde047a0005b6" class="i-text long-text"></div></div><div class="keynote_li"><div><p>用药原因</p><input type="text" name="50a0c91894ddde047a0005b7" class="i-text long-text"></div></div><div class="keynote_li"><div><p>是否为可疑药品</p>
+                    <p class="P-A">A:是</p>
+                    <p class="P-B">B:否</p><input type="text" name="50a0c91894ddde047a0005b8" class="i-text"></div></div><div class="keynote_li"><div><p>给药剂量、频率</p><input type="text" name="50a0c91894ddde047a0005bb" class="i-text long-text"></div></div><div class="keynote_li"><div><p>给药途径</p><input type="text" name="50a0c91894ddde047a0005bc" class="i-text long-text"></div></div><div class="keynote_li"><div><p>开始用药时间</p><input type="date" name="50a0c91894ddde047a0005bd" class="i-text long-text"></div></div><div class="keynote_li"><div><p>停药时间</p><input type="date" name="50a0c91894ddde047a0005be" class="i-text long-text"></div></div><div class="keynote_li"><div><p>措施</p>
+                    <p class="P-A">A:继续用药</p>
+                    <p class="P-B">B:改变剂量</p>
+                    <p class="P-C">C:停止用药</p>
+                    <p class="P-D">D:未知</p><input type="text" name="50a0c91894ddde047a0005bf" class="i-text"></div></div>
+
+                    <a class="add_bms" href="#">再添加一条</a>
+                    <a class="next_step_2" href="#">下一步</a>
+                    <input type="submit" class="btn" value="提交"/>
+                </form>
+                </li>
+                <li style="display:none;">
+                <p class="new_page_title">新增合并药信息1</p>
+                <form id="box9" class="box">
+                    <div class="keynote_li"><div><p>药品名称</p><input type="text" name="50a0c91894ddde047a0005b6" class="i-text long-text"></div></div><div class="keynote_li"><div><p>用药原因</p><input type="text" name="50a0c91894ddde047a0005b7" class="i-text long-text"></div></div><div class="keynote_li"><div><p>是否为可疑药品</p>
+                     <p class="P-A">A:是</p>
+                    <p class="P-B">B:否</p><input type="text" name="50a0c91894ddde047a0005b8" class="i-text"></div></div><div class="keynote_li"><div><p>给药剂量、频率</p><input type="text" name="50a0c91894ddde047a0005bb" class="i-text long-text"></div></div><div class="keynote_li"><div><p>给药途径</p><input type="text" name="50a0c91894ddde047a0005bc" class="i-text long-text"></div></div><div class="keynote_li"><div><p>开始用药时间</p><input type="date" name="50a0c91894ddde047a0005bd" class="i-text long-text"></div></div><div class="keynote_li"><div><p>停药时间</p><input type="date" name="50a0c91894ddde047a0005be" class="i-text long-text"></div></div><div class="keynote_li"><div><p>措施</p> <p class="P-A">A:继续用药</p>
+                    <p class="P-B">B:改变剂量</p>
+                    <p class="P-C">C:停止用药</p>
+                    <p class="P-D">D:未知</p><input type="text" name="50a0c91894ddde047a0005bf" class="i-text"></div></div>
+
+                    <a class="add_bms" href="#">再添加一条</a>
+                    <a class="next_step_2" href="#">下一步</a>
+                    <input type="submit" class="btn" value="提交"/>
+                </form>
+                </li>
+
+                <li style="display:none;">
+                <p class="new_page_title">新增合并药信息2</p>
+                <form id="box10" class="box">
+                    <div class="keynote_li"><div><p>药品名称</p><input type="text" name="50a0c91894ddde047a0005b6" class="i-text long-text"></div></div><div class="keynote_li"><div><p>用药原因</p><input type="text" name="50a0c91894ddde047a0005b7" class="i-text long-text"></div></div><div class="keynote_li"><div><p>是否为可疑药品</p> <p class="P-A">A:是</p>
+                    <p class="P-B">B:否</p><input type="text" name="50a0c91894ddde047a0005b8" class="i-text"></div></div><div class="keynote_li"><div><p>给药剂量、频率</p><input type="text" name="50a0c91894ddde047a0005bb" class="i-text long-text"></div></div><div class="keynote_li"><div><p>给药途径</p><input type="text" name="50a0c91894ddde047a0005bc" class="i-text long-text"></div></div><div class="keynote_li"><div><p>开始用药时间</p><input type="date" name="50a0c91894ddde047a0005bd" class="i-text long-text"></div></div><div class="keynote_li"><div><p>停药时间</p><input type="date" name="50a0c91894ddde047a0005be" class="i-text long-text"></div></div><div class="keynote_li"><div><p>措施</p> <p class="P-A">A:继续用药</p>
+                    <p class="P-B">B:改变剂量</p>
+                    <p class="P-C">C:停止用药</p>
+                    <p class="P-D">D:未知</p><input type="text" name="50a0c91894ddde047a0005bf" class="i-text"></div></div>
+
+                    <a class="add_bms" href="#">再添加一条</a>
+                    <a class="next_step_2" href="#">下一步</a>
+                    <input type="submit" class="btn" value="提交"/>
+                </form>
+                </li>
+
+                <li style="display:none;">
+                <p class="new_page_title">新增合并药信息3</p>
+                <form id="box11" class="box">
+                    <div class="keynote_li"><div><p>药品名称</p><input type="text" name="50a0c91894ddde047a0005b6" class="i-text long-text"></div></div><div class="keynote_li"><div><p>用药原因</p><input type="text" name="50a0c91894ddde047a0005b7" class="i-text long-text"></div></div><div class="keynote_li"><div><p>是否为可疑药品</p> <p class="P-A">A:是</p>
+                    <p class="P-B">B:否</p><input type="text" name="50a0c91894ddde047a0005b8" class="i-text"></div></div><div class="keynote_li"><div><p>给药剂量、频率</p><input type="text" name="50a0c91894ddde047a0005bb" class="i-text long-text"></div></div><div class="keynote_li"><div><p>给药途径</p><input type="text" name="50a0c91894ddde047a0005bc" class="i-text long-text"></div></div><div class="keynote_li"><div><p>开始用药时间</p><input type="date" name="50a0c91894ddde047a0005bd" class="i-text long-text"></div></div><div class="keynote_li"><div><p>停药时间</p><input type="date" name="50a0c91894ddde047a0005be" class="i-text long-text"></div></div><div class="keynote_li"><div><p>措施</p> <p class="P-A">A:继续用药</p>
+                    <p class="P-B">B:改变剂量</p>
+                    <p class="P-C">C:停止用药</p>
+                    <p class="P-D">D:未知</p><input type="text" name="50a0c91894ddde047a0005bf" class="i-text"></div></div>
+
+                    <a class="add_bms" href="#">再添加一条</a>
+                    <a class="next_step_2" href="#">下一步</a>
+                    <input type="submit" class="btn" value="提交"/>
+                </form>
+                </li>
+                <li style="display:none;">
+                <p class="new_page_title">新增合并药信息4</p>
+                <form id="box12" class="box">
+                    <div class="keynote_li"><div><p>药品名称</p><input type="text" name="50a0c91894ddde047a0005b6" class="i-text long-text"></div></div><div class="keynote_li"><div><p>用药原因</p><input type="text" name="50a0c91894ddde047a0005b7" class="i-text long-text"></div></div><div class="keynote_li"><div><p>是否为可疑药品</p> <p class="P-A">A:是</p>
+                    <p class="P-B">B:否</p><input type="text" name="50a0c91894ddde047a0005b8" class="i-text"></div></div><div class="keynote_li"><div><p>给药剂量、频率</p><input type="text" name="50a0c91894ddde047a0005bb" class="i-text long-text"></div></div><div class="keynote_li"><div><p>给药途径</p><input type="text" name="50a0c91894ddde047a0005bc" class="i-text long-text"></div></div><div class="keynote_li"><div><p>开始用药时间</p><input type="date" name="50a0c91894ddde047a0005bd" class="i-text long-text"></div></div><div class="keynote_li"><div><p>停药时间</p><input type="date" name="50a0c91894ddde047a0005be" class="i-text long-text"></div></div><div class="keynote_li"><div><p>措施</p> <p class="P-A">A:继续用药</p>
+                    <p class="P-B">B:改变剂量</p>
+                    <p class="P-C">C:停止用药</p>
+                    <p class="P-D">D:未知</p><input type="text" name="50a0c91894ddde047a0005bf" class="i-text"></div></div>
+
+                    <input type="submit" class="btn" value="提交"/>
+                </form>
+                </li>
+                <!--不良事件信息-->
+                <!--不良事件信息1-->
+                <li id="buliang" style="display:none;">
+                    <p class="new_page_title">不良事件信息</p>
+                    <form id="box13" class="box">
+                        <div class="keynote_li"><div><p>不良事件名称</p><input type="text" name="50a0c91894ddde047a0005fc" class="i-text long-text"></div></div><div class="keynote_li"><div><p>发生时间</p><input type="date" name="50a0c91894ddde047a0005fd" class="i-text long-text"></div></div><div class="keynote_li"><div><p>结束时间/持续</p><input type="date" name="50a0c91894ddde047a0005fe" class="i-text long-text"></div></div><div class="keynote_li yanzhong_box"><div><p>严重程度</p>
+                        <p class="P-A">A:死亡</p>
+                        <p class="P-B">B:导致住院或延长住院事件</p>
+                        <p class="P-C">C:永久或显著功能丧失</p>
+                        <p class="P-D">D:危及生命</p>
+                        <p class="P-E">E:致畸</p>
+                        <p class="P-F">F:重要医学事件，可能导致前述情况发生</p><input type="text" name="50a0c91894ddde047a0005ff" class="i-text"></div></div><div class="keynote_li"><div><p>HCP相关性判断</p>
+                        <p class="P-A">A:肯定</p>
+                        <p class="P-B">B:很可能</p>
+                        <p class="P-C">C:可能</p>
+                        <p class="P-D">D:可能无关</p>
+                        <p class="P-E">E:待评价</p>
+                        <p class="P-F">F:无法评价</p><input type="text" name="50a0c91894ddde047a000606" class="i-text"></div></div>
+                        <div class="keynote_li">
+                            <div>
+                                <p>不良事件结局</p>
+                                <p class="P-A">A:痊愈</p>
+                            <p class="P-B">B:好转中</p>
+                            <p class="P-C">C:未好转</p>
+                            <p class="P-D">D:死亡</p>
+                            <p class="P-E">E:为止</p>
+                            <input type="text" name="50a0c91894ddde047a000606" class="i-text">
+                            </div>
+                        </div>
+                        <div class="keynote_li">
+                            <div>
+                                <p>死亡时间</p>
+
+                            <input type="date" name="50a0c91894ddde047a000606" class="i-text">
+                            </div>
+                        </div>
+
+                        <a class="add_bms" href="#">再添加一条</a>
+                        <a class="next_step_3" href="#">下一步</a>
+                        <input type="submit" class="btn" value="提交"/>
+                    </form>
+                </li>
+                <!--不良事件信息2-->
+                <li style="display:none;">
+                    <p class="new_page_title">新增不良事件信息1</p>
+                    <form id="box14" class="box">
+                        <div class="keynote_li"><div><p>不良事件名称</p><input type="text" name="50a0c91894ddde047a0005fc" class="i-text long-text"></div></div><div class="keynote_li"><div><p>发生时间</p><input type="date" name="50a0c91894ddde047a0005fd" class="i-text long-text"></div></div><div class="keynote_li"><div><p>结束时间/持续</p><input type="date" name="50a0c91894ddde047a0005fe" class="i-text long-text"></div></div><div class="keynote_li yanzhong_box"><div><p>严重程度</p>  <p class="P-A">A:死亡</p>
+                        <p class="P-B">B:导致住院或延长住院事件</p>
+                        <p class="P-C">C:永久或显著功能丧失</p>
+                        <p class="P-D">D:危及生命</p>
+                        <p class="P-E">E:致畸</p>
+                        <p class="P-F">F:重要医学事件，可能导致前述情况发生</p><input type="text" name="50a0c91894ddde047a0005ff" class="i-text"></div></div><div class="keynote_li"><div><p>HCP相关性判断</p>   <p class="P-A">A:肯定</p>
+                        <p class="P-B">B:很可能</p>
+                        <p class="P-C">C:可能</p>
+                        <p class="P-D">D:可能无关</p>
+                        <p class="P-E">E:待评价</p>
+                        <p class="P-F">F:无法评价</p><input type="text" name="50a0c91894ddde047a000606" class="i-text"></div></div>
+                        <div class="keynote_li">
+                            <div>
+                                <p>不良事件结局</p>
+                                <p class="P-A">A:痊愈</p>
+                            <p class="P-B">B:好转中</p>
+                            <p class="P-C">C:未好转</p>
+                            <p class="P-D">D:死亡</p>
+                            <p class="P-E">E:为止</p>
+                            <input type="text" name="50a0c91894ddde047a000606" class="i-text">
+                            </div>
+                        </div>
+                        <div class="keynote_li">
+                            <div>
+                                <p>死亡时间</p>
+
+                            <input type="date" name="50a0c91894ddde047a000606" class="i-text">
+                            </div>
+                        </div>
+
+                        <a class="add_bms" href="#">再添加一条</a>
+                        <a class="next_step_3" href="#">下一步</a>
+                        <input type="submit" class="btn" value="提交"/>
+                    </form>
+                </li>
+                <!--不良事件信息3-->
+                <li style="display:none;">
+                    <p class="new_page_title">新增不良事件信息2</p>
+                    <form id="box15" class="box">
+                        <div class="keynote_li"><div><p>不良事件名称</p><input type="text" name="50a0c91894ddde047a0005fc" class="i-text long-text"></div></div><div class="keynote_li"><div><p>发生时间</p><input type="date" name="50a0c91894ddde047a0005fd" class="i-text long-text"></div></div><div class="keynote_li"><div><p>结束时间/持续</p><input type="date" name="50a0c91894ddde047a0005fe" class="i-text long-text"></div></div><div class="keynote_li yanzhong_box"><div><p>严重程度</p>  <p class="P-A">A:死亡</p>
+                        <p class="P-B">B:导致住院或延长住院事件</p>
+                        <p class="P-C">C:永久或显著功能丧失</p>
+                        <p class="P-D">D:危及生命</p>
+                        <p class="P-E">E:致畸</p>
+                        <p class="P-F">F:重要医学事件，可能导致前述情况发生</p><input type="text" name="50a0c91894ddde047a0005ff" class="i-text"></div></div><div class="keynote_li"><div><p>HCP相关性判断</p>   <p class="P-A">A:肯定</p>
+                        <p class="P-B">B:很可能</p>
+                        <p class="P-C">C:可能</p>
+                        <p class="P-D">D:可能无关</p>
+                        <p class="P-E">E:待评价</p>
+                        <p class="P-F">F:无法评价</p><input type="text" name="50a0c91894ddde047a000606" class="i-text"></div></div>
+                        <div class="keynote_li">
+                            <div>
+                                <p>不良事件结局</p>
+                                <p class="P-A">A:痊愈</p>
+                            <p class="P-B">B:好转中</p>
+                            <p class="P-C">C:未好转</p>
+                            <p class="P-D">D:死亡</p>
+                            <p class="P-E">E:为止</p>
+                            <input type="text" name="50a0c91894ddde047a000606" class="i-text">
+                            </div>
+                        </div>
+                        <div class="keynote_li">
+                            <div>
+                                <p>死亡时间</p>
+
+                            <input type="date" name="50a0c91894ddde047a000606" class="i-text">
+                            </div>
+                        </div>
+
+                        <a class="add_bms" href="#">再添加一条</a>
+                        <a class="next_step_3" href="#">下一步</a>
+                        <input type="submit" class="btn" value="提交"/>
+                    </form>
+                </li>
+                <!--不良事件信息4-->
+                <li style="display:none;">
+                    <p class="new_page_title">新增不良事件信息3</p>
+                    <form id="box16" class="box">
+                        <div class="keynote_li"><div><p>不良事件名称</p><input type="text" name="50a0c91894ddde047a0005fc" class="i-text long-text"></div></div><div class="keynote_li"><div><p>发生时间</p><input type="date" name="50a0c91894ddde047a0005fd" class="i-text long-text"></div></div><div class="keynote_li"><div><p>结束时间/持续</p><input type="date" name="50a0c91894ddde047a0005fe" class="i-text long-text"></div></div><div class="keynote_li yanzhong_box"><div><p>严重程度</p>  <p class="P-A">A:死亡</p>
+                        <p class="P-B">B:导致住院或延长住院事件</p>
+                        <p class="P-C">C:永久或显著功能丧失</p>
+                        <p class="P-D">D:危及生命</p>
+                        <p class="P-E">E:致畸</p>
+                        <p class="P-F">F:重要医学事件，可能导致前述情况发生</p><input type="text" name="50a0c91894ddde047a0005ff" class="i-text"></div></div><div class="keynote_li"><div><p>HCP相关性判断</p>   <p class="P-A">A:肯定</p>
+                        <p class="P-B">B:很可能</p>
+                        <p class="P-C">C:可能</p>
+                        <p class="P-D">D:可能无关</p>
+                        <p class="P-E">E:待评价</p>
+                        <p class="P-F">F:无法评价</p><input type="text" name="50a0c91894ddde047a000606" class="i-text"></div></div><div class="keynote_li">
+                            <div>
+                                <p>不良事件结局</p>
+                                <p class="P-A">A:痊愈</p>
+                            <p class="P-B">B:好转中</p>
+                            <p class="P-C">C:未好转</p>
+                            <p class="P-D">D:死亡</p>
+                            <p class="P-E">E:为止</p>
+                            <input type="text" name="50a0c91894ddde047a000606" class="i-text">
+                            </div>
+                        </div>
+                        <div class="keynote_li">
+                            <div>
+                                <p>死亡时间</p>
+
+                            <input type="date" name="50a0c91894ddde047a000606" class="i-text">
+                            </div>
+                        </div>
+
+
+                        <a class="add_bms" href="#">再添加一条</a>
+                        <a class="next_step_3" href="#">下一步</a>
+                        <input type="submit" class="btn" value="提交"/>
+                    </form>
+                </li>
+                <!--不良事件信息5-->
+                <li style="display:none;">
+                    <p class="new_page_title">新增不良事件信息4</p>
+                    <form id="box17" class="box">
+                        <div class="keynote_li"><div><p>不良事件名称</p><input type="text" name="50a0c91894ddde047a0005fc" class="i-text long-text"></div></div><div class="keynote_li"><div><p>发生时间</p><input type="date" name="50a0c91894ddde047a0005fd" class="i-text long-text"></div></div><div class="keynote_li"><div><p>结束时间/持续</p><input type="date" name="50a0c91894ddde047a0005fe" class="i-text long-text"></div></div><div class="keynote_li yanzhong_box"><div><p>严重程度</p>  <p class="P-A">A:死亡</p>
+                        <p class="P-B">B:导致住院或延长住院事件</p>
+                        <p class="P-C">C:永久或显著功能丧失</p>
+                        <p class="P-D">D:危及生命</p>
+                        <p class="P-E">E:致畸</p>
+                        <p class="P-F">F:重要医学事件，可能导致前述情况发生</p><input type="text" name="50a0c91894ddde047a0005ff" class="i-text"></div></div>
+                        <div class="keynote_li">
+                            <div>
+                                <p>HCP相关性判断</p>
+                                <p class="P-A">A:肯定</p>
+                            <p class="P-B">B:很可能</p>
+                            <p class="P-C">C:可能</p>
+                            <p class="P-D">D:可能无关</p>
+                            <p class="P-E">E:待评价</p>
+                            <p class="P-F">F:无法评价</p><input type="text" name="50a0c91894ddde047a000606" class="i-text">
+                            </div>
+                        </div>
+                        <div class="keynote_li">
+                            <div>
+                                <p>不良事件结局</p>
+                                <p class="P-A">A:痊愈</p>
+                            <p class="P-B">B:好转中</p>
+                            <p class="P-C">C:未好转</p>
+                            <p class="P-D">D:死亡</p>
+                            <p class="P-E">E:为止</p>
+                            <input type="text" name="50a0c91894ddde047a000606" class="i-text">
+                            </div>
+                        </div>
+                        <div class="keynote_li">
+                            <div>
+                                <p>死亡时间</p>
+
+                            <input type="date" name="50a0c91894ddde047a000606" class="i-text">
+                            </div>
+                        </div>
+
+                        <input type="submit" class="btn" value="提交"/>
+                    </form>
+                </li>
+                <li id="miaoshu" style="display:none;">
+                    <p class="new_page_title">不良事件信息</p>
+                    <form id="box18" class="box">
+                        <div class="keynote_li"><div><p>不良事件过程描述（包括症状、体征、临床检验等）及处理情况</p><input type="text" name="50a0c91894ddde047a000674" class="i-text long-text"></div></div>
+                        <a class="tijiao" href="#" onclick="commit();">完成表单</a>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </html>
